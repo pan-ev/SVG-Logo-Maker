@@ -1,5 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const genLogo = require("./lib/generateLogo.js");
+const genShape = require("./lib/shapes.js");
 
 const questions = [
   {
@@ -26,7 +28,7 @@ const questions = [
 ];
 
 function writeToFile(fileName, data) {
-  fs.writeFile(fileName, genMarkdown.generateMarkdown(data), (err) =>
+  fs.writeFile(fileName, genLogo.generateLogo(data), (err) =>
     err ? console.log(err) : console.log("Generated logo.svg")
   );
 }
