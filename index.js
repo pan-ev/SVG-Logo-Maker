@@ -24,11 +24,34 @@ const questions = [
     type: "input",
     message: "Please enter your logo shape's color",
     name: "shapeColor",
-  }
+  },
 ];
 
 function writeToFile(fileName, data) {
-  fs.writeFile(fileName, genLogo.generateLogo(data), (err) =>
+  var svgShape;
+    if (data.shape == "triangle") {
+    const shape = new genShape.Triangle(data.shape, data.shapeColor);
+    svgShape = shape.render(data.shapeColor);
+  } else if (data.shape == "circle") {
+    const shape = new genShape.Circle(data.shape, data.shapeColor);
+    svgShape = shape.render(data.shapeColor);
+  } else if (data.shape == "square") {
+    const shape = new genShape.Square(data.shape, data.shapeColor);
+    svgShape = shape.render(data.shapeColor);
+  }
+
+  var svgText = `<svg version="1.1"
+  width="300" height="200"
+  xmlns="http://www.w3.org/2000/svg">
+
+${svgShape}
+<text x="150" y="120" font-size="50" text-anchor="middle" fill="${
+    data.textColor
+  }">${data.text.toUpperCase()}</text>
+
+</svg>`;
+
+  fs.writeFile(fileName, svgText, (err) =>
     err ? console.log(err) : console.log("Generated logo.svg")
   );
 }
