@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const genLogo = require("./lib/generateLogo.js");
 const genShape = require("./lib/shapes.js");
 
 const questions = [
@@ -29,7 +28,7 @@ const questions = [
 
 function writeToFile(fileName, data) {
   var svgShape;
-    if (data.shape == "triangle") {
+  if (data.shape == "triangle") {
     const shape = new genShape.Triangle(data.shape, data.shapeColor);
     svgShape = shape.render(data.shapeColor);
   } else if (data.shape == "circle") {
